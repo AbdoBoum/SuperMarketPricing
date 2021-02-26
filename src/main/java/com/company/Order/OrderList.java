@@ -49,7 +49,6 @@ public class OrderList {
         for(OrderItem oi : this.getOrderItems()){
             totalPrice = totalPrice.add(oi.getPrice());
             //System.out.println("Order List getTotalPrice method : "+oi.getPrice().getAmount().toString());
-
         }
         //System.out.println("Order List getTotalPrice method return : "+totalPrice.getAmount().toString());
         return totalPrice;

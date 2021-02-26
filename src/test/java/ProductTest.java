@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public class ProdutTest {
+public class ProductTest {
 
     private OfferStrategyFactory offerStrategyFactory;
     private OfferStrategy offerStrategy;
@@ -32,10 +32,26 @@ public class ProdutTest {
     }
 
     @Test()
+    public void testBigQuantityOfferStrategy(){
+        offerStrategyFactory = new OfferStrategyFactoryImpl();
+
+        Product p = new Product(13000,"Product 2",Price.of(140));
+        OrderList ol = new OrderList(offerStrategyFactory);
+        ol.addOrderItem(p, 7);
+
+        Price expectedPrice = Price.of(140*7);
+        assertEquals(expectedPrice,ol.getTotalPrice());
+
+        ol.addOrderItem(p, 7);
+        expectedPrice = Price.of(140*14*0.9);
+        assertEquals(expectedPrice,ol.getTotalPrice());
+    }
+
+    @Test()
     public void testThirdOneFreeOfferStrategy(){
         offerStrategyFactory = new OfferStrategyFactoryImpl();
 
-        Product p = new Product(7500,"Product 2", Price.of(250));
+        Product p = new Product(7500,"Product 3", Price.of(250));
 
         OrderList ol = new OrderList(offerStrategyFactory);
         ol.addOrderItem(p,5);
@@ -51,8 +67,8 @@ public class ProdutTest {
     @Test()
     public void testAllOfferStrategy(){
         offerStrategyFactory = new OfferStrategyFactoryImpl();
-        Product p1 = new Product(8000,"Product 3", Price.of(175));
-        Product p2 = new Product(3000,"Product 4", Price.of(15));
+        Product p1 = new Product(8000,"Product 4", Price.of(175));
+        Product p2 = new Product(3000,"Product 5", Price.of(15));
 
         OrderList ol = new OrderList(offerStrategyFactory);
 

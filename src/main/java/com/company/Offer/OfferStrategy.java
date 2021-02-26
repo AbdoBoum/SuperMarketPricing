@@ -5,6 +5,6 @@ import com.company.Order.OrderItem;
 
 public interface OfferStrategy {
 
-    public Price getPrice(OrderItem item);
+    public Price getPrice(OrderItem orderItem);
 
 }
