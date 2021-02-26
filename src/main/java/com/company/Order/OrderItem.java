@@ -31,4 +31,18 @@ public class OrderItem {
         quantity += units;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if (o ==this){
+            return true;
+        }
+        if(!(o instanceof OrderItem)) {
+            return false;
+        }
+
+        OrderItem orderItem = (OrderItem) o;
+
+        return this.getProductBarCode() == orderItem.getProductBarCode();
+    }
+
 }
