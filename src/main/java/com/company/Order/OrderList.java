@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,11 +21,15 @@ public class OrderList {
     private List<OrderItem> orderItems;
     private OfferStrategyFactory offerStrategyFactory;
 
+    public OrderList(OfferStrategyFactory offerStrategyFactory) {
+        this.offerStrategyFactory = offerStrategyFactory;
+        this.orderItems = new ArrayList<>();
+    }
 
     public void addOrderItem(Product product, int units){
 
         OrderItem existingOrderItem = orderItems.stream()
-                .filter(oi->product.equals(oi))
+                .filter(oi->product.getBarCode()==oi.getProductBarCode())
                 .findAny()
                 .orElse(null);
 
@@ -41,10 +46,12 @@ public class OrderList {
 
         Price totalPrice = Price.of(0);
 
-        for(OrderItem oi : orderItems){
-            totalPrice.add(oi.getPrice());
-        }
+        for(OrderItem oi : this.getOrderItems()){
+            totalPrice = totalPrice.add(oi.getPrice());
+            //System.out.println("Order List getTotalPrice method : "+oi.getPrice().getAmount().toString());
 
+        }
+        //System.out.println("Order List getTotalPrice method return : "+totalPrice.getAmount().toString());
         return totalPrice;
     }
 }

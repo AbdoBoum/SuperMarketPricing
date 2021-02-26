@@ -1,5 +1,7 @@
 package com.company.Entities;
 
+import com.company.Order.OrderItem;
+
 import java.math.BigDecimal;
 
 public class Price {
@@ -37,5 +39,19 @@ public class Price {
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o ==this){
+            return true;
+        }
+        if(!(o instanceof Price)) {
+            return false;
+        }
+
+        Price price = (Price) o;
+
+        return this.getAmount().equals(price.getAmount());
     }
 }

@@ -6,6 +6,6 @@ import com.company.Order.OrderItem;
 public class NormalOfferStrategy implements OfferStrategy {
 
     public Price getPrice(OrderItem item) {
-        return item.getPrice().mult(item.getQuantity());
+        return item.getUnitPrice().mult(item.getQuantity());
     }
 }
