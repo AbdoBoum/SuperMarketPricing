@@ -19,6 +19,7 @@ public class OfferStrategyFactoryImpl implements OfferStrategyFactory {
      * Another idea would be to generate random offerStrategies for each product */
 
     public OfferStrategy create(long barcode) {
-        return null;
+        return new NormalOfferStrategy();
+        // return new ThirdOneFreeOfferStrategy();
     }
 }
